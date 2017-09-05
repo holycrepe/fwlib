@@ -1,46 +1,20 @@
-declare interface ElementMatrix {
-    0: number,
-    1: number,
-    2: number,
-    3: number,
-    4: number,
-    5: number,
-    6: number,
-    7: number,
-    8: number
+
+import {Layer, LayerElementData} from "layers"
+declare module fwlib {
+    export interface layers {
+        getElements(dom?:Fw.FwDocument, includeWebLayers?:boolean): Element[];
+        getElementData(dom?:Fw.FwDocument, includeWebLayers?:boolean): LayerElementData;
+        alertLayers (inDom:Fw.FwDocument, inJustReturnOutput: boolean): string;
+        copyLayer(inLayer:Layer, inTargetDom:Fw.FwDocument, inSourceDom:Fw.FwDocument): void;
+        copyLayerBetweenPages(inLayer:Layer, inSourcePageIndex:number, inTargetPageIndex:number): void;
+        getLayerIndexByName(inLayerName:string, inDom:Fw.FwDocument): number;
+        getTopLayerAncestorIndex(inLayerIndex:number, inDom:Fw.FwDocument):number;
+        getTopLayerIndices(inDom:Fw.FwDocument):number[];
+    }
 }
-declare interface ElementTransform {
-    matrix: ElementMatrix
-}
-declare interface PixelRectangle {
-    top: number,
-    left: number,
-    right: number,
-    bottom: number
-}
-declare interface FwElement {
-    targetText: string,
-    urlText: string,
-    altText: string,
-    instanceType: string,
-    transform: ElementTransform,
-    transformMode: string,
-    symbolName: string,
-    symbolID: string,
-    isSmartShape: boolean,
-    customData: any,
-    effectList: any[],
-    locked: boolean,
-    mask: any,
-    name: string,
-    blendMode: string,
-    opacity: number,
-    visible: boolean,
-    pixelRect: PixelRectangle,
-    height: number,
-    left: number,
-    width: number,
-    top: number,
-    isLayer: boolean,
-    javascriptString: string
+global {
+    import * as layers from "layers"
+    export interface FwModules {
+        layers: fwlib.layers
+    }
 }

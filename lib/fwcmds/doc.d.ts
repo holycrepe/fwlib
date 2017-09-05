@@ -1,4 +1,6 @@
-declare module doc {
-    export function getDom();
-    export function isEmpty():boolean;
+declare namespace fwcmds {
+    export interface doc {
+        getDom();
+        isEmpty(): boolean;
+    }
 }

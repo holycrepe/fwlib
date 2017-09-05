@@ -1,3 +1,9 @@
+///<reference path="panel.d.ts"/>
+declare interface FwPanelOptions {
+    inputSize?: number;
+    labelSize?: number;
+}
+
 declare class FwPanel {
     get name():string;
     get contextPath():string;
@@ -7,12 +13,10 @@ declare class FwPanel {
     get textInputs():string[];
     options: FwPanelOptions;
 
-    constructor(panelName:string, scriptDir?:string);
+    constructor(panelInfo: fwlib.panel.PanelInfo, toggleButtons?: string[], textInputs?: string[], options?:FwPanelOptions);
+    getFormHeading(heading:string);
     getButtonIcons(buttonName:string);
     getButtonIcon(buttonName:string):string;
     getSettingName(elementName:string):string;
-}
-declare interface FwPanelOptions {
-    inputSize?: number;
-    labelSize?: number;
+
 }

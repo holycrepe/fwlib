@@ -16,7 +16,7 @@ declare namespace fwlib {
         createTempDirectory(): string;
         path(...paths: string[]): string;
         convertURLToOSPath(url: string, dontQuote?: boolean);
-        getAbsolutePath(base: string, relative: string);
+        getAbsolutePath(base: string, relative?: string);
         createDirectories(path: string): number;
 
     }

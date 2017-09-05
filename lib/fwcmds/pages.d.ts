@@ -1,9 +1,9 @@
 import {CanvasColor, PageLocation} from "./PageEnums";
-
 interface PageSize {
     width: number;
     height: number;
 }
+
 interface AddPageOptions {
     name?: string;
     canvas?: CanvasColor;
@@ -14,11 +14,13 @@ interface AddPageOptions {
     insertClipboard?: boolean;
     size?: PageSize;
 }
+
 interface PageExportState {
     options: object;
     settings: object;
     matte: string;
 }
+
 interface PageState {
     background: string;
     number: number;
@@ -27,9 +29,13 @@ interface PageState {
     guides: object;
     'export': PageExportState;
 }
-export function add(options?:AddPageOptions);
-export function getState(dom?):PageState;
-export function importTemplate(inPath:string,inName?:string,inCopyGuides?:boolean):PageState;
-export function setExportState(state:PageExportState, dom?);
-export function setSize(size:PageSize, dom?);
 
+declare namespace fwcmds {
+    export interface pages {
+        add(options?: AddPageOptions);
+        getState(dom?): PageState;
+        importTemplate(inPath: string, inName?: string, inCopyGuides?: boolean): PageState;
+        setExportState(state: PageExportState, dom?);
+        setSize(size: PageSize, dom?);
+    }
+}
