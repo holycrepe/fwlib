@@ -25,6 +25,8 @@ declare interface FwPanelFormItemOptions {
 }
 declare interface FwPanelFormTextOptions extends FwPanelFormItemOptions {
     numLabels?: number;
+    percentWidth?: number;
+    widthOffset?: number;
 }
 declare interface FwPanelFormButtonOptions extends FwPanelFormItemOptions {
     action?: string;
@@ -46,6 +48,9 @@ declare interface FwPanelFormEntryToggleOptions {
 declare interface FwPanelFormEntryOptions extends FwPanelFormEntryToggleOptions {
     text?: FwPanelFormTextOptions
 }
+declare interface FwPanelContainerOptions {
+    includeSeparators?: boolean
+}
 
 declare class FwPanel {
     get name():string;
@@ -53,6 +58,8 @@ declare class FwPanel {
     get scriptDirectory():string;
     get commandPanelDirectory():string;
     get elements():FwPanelElements;
+    get vRule():object;
+    jsml: object;
     options: FwPanelOptions;
     result: FlexEventResult;
     onSettingUpdated:UpdatePrefsCallback;
@@ -62,6 +69,8 @@ declare class FwPanel {
                 onSettingUpdated?:UpdatePrefsCallback,
                 elements?: FwPanelElements,
                 options?:FwPanelOptions);
+    getTopRow(...groups:object[][]);
+    getTopRow(includeSeparators:boolean, ...groups:object[][]);
     getFormHeading(heading:string);
     getFormEntry(title:string, options?:FwPanelFormEntryOptions);
     getFormToggleEntry(title:string, options?:FwPanelFormEntryOptions);

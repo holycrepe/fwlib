@@ -1,4 +1,6 @@
-import {LoDashStatic} from "./lodash/index";
+
+
+import {LoDashStatic} from "../typings/lodash/index";
 
 declare module fwlib {
     export interface utils {
