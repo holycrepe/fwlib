@@ -19,6 +19,7 @@ declare global {
         enableFolder?: boolean;
         delimiters?: RegExp;
         outputDirectory?: RegExp;
+        outputDirectoryReplacement?: string;
     }
 
     export interface RenamePagesOptions {
