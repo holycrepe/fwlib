@@ -1,6 +1,6 @@
 declare namespace OrangeCommands {
     interface OcSymbolSnapshot {
-        readonly symbolInfo: Elements.SymbolInfo[];
+        readonly symbolInfo: OrangeCommands.Elements.SymbolInfo[];
         readonly symbols: Elements.Symbol[];
     }
     interface OcSymbolInfo extends OcSymbolSnapshot {
@@ -12,7 +12,7 @@ declare namespace OrangeCommands {
         readonly elementData: LayerElementData,
     }
     interface OcElementData extends OcSymbolInfo, OcElementSnapshot {
-        getElements(ignoreWebLayers?:boolean): Element[];
-        getElementData(ignoreWebLayers?:boolean): LayerElementData;
+        getElements(includeWebLayers?:boolean): Element[];
+        getElementData(includeWebLayers?:boolean): LayerElementData;
     }
 }

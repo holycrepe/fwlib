@@ -12,6 +12,8 @@ declare module fwlib {
         capitalizeFirstLetter(subject: string): string;
         proxifyDom(dom?): string;
         proxify(obj?): object;
+        dump(obj): void;
+        benchmark(func:Function);
         isArray(arg: any): boolean;
         getDate(...args: object[]): Date;
         getFile(...args: object[]): File;

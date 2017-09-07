@@ -1,6 +1,6 @@
 
 /** OC.Doc Interface **/
-export default interface DocumentStatic extends OrangeCommands.OcElementSnapshot {
+export default interface DocumentStatic extends OrangeCommands.OcElementData {
     OrangeCommandsModuleTest();
     ExportPagesFlags: ExportPagesFlags;
     renamePages(options: RenamePagesOptions);

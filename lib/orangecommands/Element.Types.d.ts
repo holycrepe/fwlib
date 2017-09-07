@@ -5,6 +5,12 @@ declare namespace OrangeCommands.Elements {
         elementName: string;
     }
     export interface Symbol extends SymbolInfo {
-
+        element: Element;
+    }
+    export interface SymbolDataOptions {
+        full?: boolean;
+        synchronizeNames?: boolean;
+        includeElementReference?: boolean;
+        includeWebLayers?: boolean;
     }
 }

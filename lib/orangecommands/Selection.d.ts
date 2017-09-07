@@ -1,4 +1,4 @@
-export default interface Selection extends OrangeCommands.OcElementSnapshot {
+export default interface Selection extends OrangeCommands.OcElementData {
     stored_selection: {};
     current: Element[];
     all: Element[];

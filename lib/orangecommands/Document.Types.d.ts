@@ -1,4 +1,5 @@
 declare global {
+    import PageInfo = OrangeCommands.Pages.PageInfo;
     type ExportPageFormat = 'CURRENT' | 'PNG24' | 'PNG32' | object;
 
     interface ExportPageNamingOptions {
@@ -17,6 +18,7 @@ declare global {
         enablePrefix?: boolean;
         enableFolder?: boolean;
         delimiters?: RegExp;
+        outputDirectory?: RegExp;
     }
 
     export interface RenamePagesOptions {
@@ -40,8 +42,13 @@ declare global {
         flags?: string[];
         debug?: {
             options?: boolean,
-            processPageName?: boolean
             processDocName?: boolean
+            processFolderName?: boolean
+            processPageName?: boolean
+            exportName?: boolean;
+            exportNameSummary?: boolean;
+            exportNameResults?: boolean;
+            exportNameTemplates?: boolean;
         }
     }
 

@@ -14,6 +14,7 @@ declare namespace Fw {
         changeCurrentPage(pageNum: number);
         deletePageAt(pageNum: number);
         setPageName(pageNum: number, newName: string);
+        setElementName(name: string);
         setTextRuns(text);
         setExportOptions(options: ExportOptions);
         setMatteColor(bUseMatteColor:boolean, matteColor:string);
@@ -179,6 +180,10 @@ declare interface PixelRectangle {
 declare interface Point {
     x: number,
     y: number
+}
+declare interface Size {
+    width: number,
+    height: number
 }
 declare global {
     export interface FwElementImage {

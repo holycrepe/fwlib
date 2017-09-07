@@ -1,6 +1,7 @@
 
 import Elements = OrangeCommands.Elements
 export default interface ElementsStatic {
-    getSymbolInfo(elements: Element[]): Elements.SymbolInfo[];
-    getSymbols(elements: Element[]): Elements.Symbol[];
+    getSymbol(element: Element, options?:Elements.SymbolDataOptions): Elements.Symbol|Elements.SymbolInfo;
+    getSymbolInfo(elements: Element[], options?:Elements.SymbolDataOptions): Elements.SymbolInfo;
+    getSymbols(elements: Element[], options?:Elements.SymbolDataOptions): Elements.Symbol[];
 }

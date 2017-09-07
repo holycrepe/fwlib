@@ -6,7 +6,11 @@ declare namespace ActionScript {
         selectedIndex: number
         selectedIndices: number[]
     }
-    export interface FlexEventResult extends Array<string> {
+
+    export interface FlexEventResult extends Array<any> {
+
+    }
+    export interface FlexEventResults extends Array<FlexEventResult> {
 
     }
     export interface FlexDataItem<T> {
@@ -18,6 +22,6 @@ declare namespace ActionScript {
         item?: FlexDataItem<any>;
         itemData?: any;
         currentValues: T;
-        result: FlexEventResult;
+        result: FlexEventResults;
     }
 }
