@@ -11,6 +11,6 @@ declare namespace OrangeCommands.Elements {
         full?: boolean;
         synchronizeNames?: boolean;
         includeElementReference?: boolean;
-        includeWebLayers?: boolean;
+        layers?: LayerElementDataOptions;
     }
 }

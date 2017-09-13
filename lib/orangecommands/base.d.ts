@@ -4,15 +4,15 @@ declare namespace OrangeCommands {
         readonly symbols: Elements.Symbol[];
     }
     interface OcSymbolInfo extends OcSymbolSnapshot {
-        getSymbolInfo(): Elements.SymbolInfo[];
-        getSymbols(): Elements.Symbol[];
+        getSymbolInfo(options?:Elements.SymbolDataOptions): Elements.SymbolInfo[];
+        getSymbols(options?:Elements.SymbolDataOptions): Elements.Symbol[];
     }
     interface OcElementSnapshot extends OcSymbolSnapshot {
         readonly elements: Element[];
         readonly elementData: LayerElementData,
     }
     interface OcElementData extends OcSymbolInfo, OcElementSnapshot {
-        getElements(includeWebLayers?:boolean): Element[];
-        getElementData(includeWebLayers?:boolean): LayerElementData;
+        getElements(options?:LayerElementDataOptions): Element[];
+        getElementData(options?:LayerElementDataOptions): LayerElementData;
     }
 }

@@ -3,3 +3,6 @@ declare interface LayerElementData {
     names: string[],
     elements: Element[]
 }
+declare interface LayerElementDataOptions {
+    includeWebLayers?: boolean;
+}

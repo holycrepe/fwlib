@@ -3,26 +3,32 @@
 export default interface DocumentStatic extends OrangeCommands.OcElementData {
     OrangeCommandsModuleTest();
     ExportPagesFlags: ExportPagesFlags;
+    importPages(path: string, options: RenamePagesOptions);
+    importPage(path: string, pageNumber?: number);
     renamePages(options: RenamePagesOptions);
-    getExportPagesOptions(options?: ExportPagesOptions): ExportPagesOptions;
-    processExportPagesOptions(options?: ExportPagesOptions): ExportPagesOptions;
-    get_export_page_name(options?: ExportPagesOptions): ExportPageName;
-    get_export_file_name(options?: ExportPagesOptions): ExportPageName;
-    exportPages(options?: ExportPagesOptions);
+    getExportOptions(options?: ExportPagesOptions): ExportPagesOptions;
+    exportAllPages(options?: ExportPagesOptions);
     exportMainPages(options?: ExportPagesOptions);
     exportCurrentPage(options?: ExportPagesOptions);
-    export_pages_in(options?: ExportPagesOptions);
-    export_pages_with_prefix(options?: ExportPagesOptions);
-    export_pages(options?: ExportPagesOptions);
-    export_pages_auto(options?: ExportPagesOptions);
-    export_page(options?: ExportPagesOptions, operationState?: OperationState);
-    export_page_in(options?: ExportPagesOptions);
-    export_in(path?: string, options?: ExportPagesOptions, operationState?: OperationState): void;
-    is_master_page(): boolean;
-    is_open(): boolean;
-    is_saved(): boolean;
-    is_new(): boolean;
-    is_empty(): boolean;
+    exportPages(options?: ExportPagesOptions);
+    // exportPagesAuto(options?: ExportPagesOptions);
+    // exportPagesToFolder(options?: ExportPagesOptions);
+    // exportPagesWithPrefix(options?: ExportPagesOptions);
+    exportPage(path?: string, options?: ExportPagesOptions, operationState?: OperationState): void;
+    exportPageAuto(options?: ExportPagesOptions, operationState?: OperationState);
+    // exportPageToFolder(options?: ExportPagesOptions);
+    isMasterPage(): boolean;
+    isOpen(): boolean;
+    isSaved(): boolean;
+    isNew(): boolean;
+    isEmpty(): boolean;
     path(): string;
     dump();
+}
+
+
+interface DocumentInternal extends OrangeCommands.OcElementData {
+    processExportPagesOptions(options?: ExportPagesOptions): ExportPagesOptions;
+    getExportPageName(options?: ExportPagesOptions): ExportPageName;
+    getExportFileName(options?: ExportPagesOptions): ExportPageName;
 }

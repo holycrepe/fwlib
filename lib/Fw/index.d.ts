@@ -1,43 +1,63 @@
 declare namespace Fw {
     export interface FwDocument {
         currentPageNum: number;
-        pagesCount: number;
-        pngText: PngText;
         docTitleWithoutExtension: string;
+        guides: Guides;
         javascriptString: string;
         pageName: string;
-        guides: Guides;
-        hasMasterPage(): boolean;
-        addNewText(boundingRectangle: PixelRectangle, bInitFromPrefs?: boolean);
+        pagesCount: number;
+        pngText: PngText;
+        addGuide(position:number, guidekind:GuideKind);
+        addNewSymbol(type:SymbolType, name:string, bAddToDoc?:boolean, nineSliceScalingStatus?:boolean);
         addNewPage();
-        reorderPages(origPos: number, newPos: number);
+        addNewText(boundingRectangle: PixelRectangle, bInitFromPrefs?: boolean);
+        align(alignmode:AlignmentMode, alignToCanvas?:boolean);
         changeCurrentPage(pageNum: number);
+        clipCopyJsToExecute(code:string);
         deletePageAt(pageNum: number);
-        setPageName(pageNum: number, newName: string);
+        exitSymbolEdit(level?:number)
+        flattenSelection();
+        getSelectionBounds():PixelRectangle;
+        hasMasterPage(): boolean;
+        importFile(fileURL:string, boundingRectangle?:PixelRectangle, bMaintainAspectRatio?:boolean, pageNumber?:number, insertAfterCurrentPage?:boolean);
+        InsertPageForImport(fileURL:string, pageNumber?:number);
+        moveSelectionBy(delta:Point, bMakeCopy?:boolean, doSubSel?:boolean);
+        removeAllGuides(guidekind?:GuideKind);
+        reorderPages(origPos: number, newPos: number);
+        resizeSelection(width: number, height: number);
+        selectAll();
+        selectAllOnLayer(layerIndex:number, bRememberSelection?:boolean, bToggleSelection?:boolean);
+        selectParents();
+        setDocumentCanvasColor(color:FwColorString);
+        setDocumentCanvasSize(boundingRectangle:PixelRectangle, currentPageOnly?:boolean);
+        setDocumentCanvasSizeToDocumentExtents(bGrowCanvas:boolean);
+        setDocumentCanvasSizeToSelection();
+        setDocumentImageSize(boundingRectangle:PixelRectangle, resolution: Resolution, currentPageOnly?:boolean);
+        setDocumentResolution(resolution:Resolution);
         setElementName(name: string);
-        setTextRuns(text);
+        setElementVisibleByName(name: string, bShow:boolean);
         setExportOptions(options: ExportOptions);
         setMatteColor(bUseMatteColor:boolean, matteColor:string);
-        selectAllOnLayer(layerIndex:number, bRememberSelection?:boolean, bToggleSelection?:boolean);
-        setDocumentCanvasSize(boundingRectangle:PixelRectangle, currentPageOnly?:boolean);
-        selectAll();
-        selectParents();
-        getSelectionBounds():PixelRectangle;
-        addGuide(position:number, guidekind:GuideKind);
-        removeAllGuides(guidekind?:GuideKind);
+        setPageName(pageNum: number, newName: string);
         setShowGuides(value:boolean);
         setTextLeading(leadingValue:number, leadingMode:TextLeadingMode);
-        resizeSelection(width: number, height: number);
-        moveSelectionBy(delta:Point, bMakeCopy?:boolean, doSubSel?:boolean);
-        clipCopyJsToExecute(code:string);
+        setTextRuns(text);
     }
+    type AlignmentMode = "left"| "right"| "top"| "bottom"| "center vertical"|"center horizontal";
+    type SymbolType = 'graphic' | 'button' | 'animation';
+    type ResolutionUnits = 'inch' | 'cm';
+    interface Resolution {
+        pixelsPerUnit: number,
+        units: ResolutionUnits
+    }
+    type FwColorString = string;
     type FwSelection = Element | Text;
     type FileBrowseType = 'open' | 'select' | 'save';
     type TextAttrLeadingMode = 'percentage';
     type TextLeadingMode = 'exact' | TextAttrLeadingMode;
     type GuideKind = 'horizontal' | 'vertical';
     export interface Guides {
-        color: string;
+        color: FwColorString;
         locked: boolean;
         hGuides: number[];
         vGuides: number[];

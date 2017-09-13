@@ -9,7 +9,7 @@ export default interface PageData extends OrangeCommands.OcElementSnapshot {
 }
 
 export default interface Page extends PageData, OrangeCommands.OcElementData {
-    getInfo(options?:Pages.PageDataOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
+    getInfo(options?:Pages.PageStateOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
     getElementCount(): number;
     verticalTrim();
     setExportFormat(options?: ExportPageFormat);
@@ -33,7 +33,7 @@ export default class PageClass implements Page {
 
     setName(newName: string);
 
-    getInfo(options?:Pages.PageDataOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
+    getInfo(options?:Pages.PageStateOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
     getElementCount(): number;
     verticalTrim();
     setExportFormat(options?: ExportPageFormat);
@@ -60,5 +60,5 @@ export default class PageState implements PageData {
     symbolInfo: OrangeCommands.Elements.SymbolInfo[];
     symbols: OrangeCommands.Elements.Symbol[];
 
-    constructor(options?:Pages.PageDataOptions);
+    constructor(options?:Pages.PageStateOptions);
 }

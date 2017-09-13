@@ -1,6 +1,20 @@
 declare global {
     import PageInfo = OrangeCommands.Pages.PageInfo;
+
     type ExportPageFormat = 'CURRENT' | 'PNG24' | 'PNG32' | object;
+
+    interface ImportPagesOptions {
+        range?: Pages.PageEnumerationOptions;
+        options?: ImportPageOptions;
+    }
+
+    interface ImportPageOptions {
+        boundingRectangle?: PixelRectangle;
+        maintainAspectRatio?:boolean;
+        pageNumber?:number;
+        insertAfterCurrentPage?:boolean;
+        exportFormat?: ExportPageFormat;
+    }
 
     interface ExportPageNamingOptions {
         template?: string;

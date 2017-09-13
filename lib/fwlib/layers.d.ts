@@ -81,6 +81,9 @@ export interface LayerElementData {
     names: string[],
     elements: Element[]
 }
+export interface LayerElementDataOptions {
+    includeWebLayers?: boolean;
+}
 export class Layer {
     constructor(inConfig);
     [attribute: string]: any;
@@ -130,8 +133,8 @@ export class LayerTree {
 }
 
 
-export function getElements(dom?:Fw.FwDocument, includeWebLayers?:boolean): Element[];
-export function getElementData(elementsOrDom?:Fw.FwDocument|Element[], includeWebLayers?:boolean): LayerElementData;
+export function getElements(dom?:Fw.FwDocument, options?: LayerElementDataOptions): Element[];
+export function getElementData(elementsOrDom?:Fw.FwDocument|Element[], options?: LayerElementDataOptions): LayerElementData;
 export function alertLayers (inDom:Fw.FwDocument, inJustReturnOutput: boolean): string;
 export function copyLayer(inLayer:Layer, inTargetDom:Fw.FwDocument, inSourceDom:Fw.FwDocument): void;
 export function copyLayerBetweenPages(inLayer:Layer, inSourcePageIndex:number, inTargetPageIndex:number): void;

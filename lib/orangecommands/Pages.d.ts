@@ -1,24 +1,36 @@
 
-
 export default interface PagesStatic {
     lastPageIndex: number;
     count: number;
     info: Pages.PageInfo;
     getCount(): number;
     getInfo(): Pages.PageInfo;
-    each(callback: (this: OrangeCommands.Page, page?: OrangeCommands.Page) => void, options?:Pages.PageEnumerationOptions);
-    eachPageElements(callback: (this: OrangeCommands.PageElementState, page?: OrangeCommands.PageElementState) => void, options?:Pages.PageEnumerationOptions);
-    withPage(callback: (this: OrangeCommands.Page, page?: OrangeCommands.Page) => void);
-    withPageElements(callback: (this: OrangeCommands.PageElementState, page?: OrangeCommands.PageElementState) => void);
-    getPageElements(options?:Pages.PageEnumerationOptions): Pages.PageCollectionElements;
-    getPageElementsList(options?:Pages.PageEnumerationOptions): OrangeCommands.PageElementState[];
+
+
+    getElements(options?:Pages.PageDataEnumerationOptions): Element[];
+    getElementData(options?:Pages.PageDataEnumerationOptions): LayerElementData;
+
+    each(callback: Pages.PageCallback, options?:Pages.PageDataEnumerationOptions);
+    eachPageElements(callback: Pages.PageElementsCallback, options?:Pages.PageDataEnumerationOptions);
+    withPage(callback: Pages.PageCallback);
+    withPageElements(callback: Pages.PageElementsCallback);
+    getPageElements(options?:Pages.PageDataEnumerationOptions): Pages.PageCollectionElements;
+    getPageElementsList(options?:Pages.PageDataEnumerationOptions): OrangeCommands.PageElementState[];
     getSummary(options?:Pages.PagesSummaryOptions): Pages.PageCollectionSummary;
     summarize(pages: Pages.PageCollectionElements, options?:Pages.PageSummaryOptions): Pages.PageCollectionSummary;
     summarizePage(page: OrangeCommands.PageElementState, options?:Pages.PageSummaryOptions): Pages.PageSummary;
-    synchronizeSymbolNames(options?:Pages.PageEnumerationOptions): number[];
+    synchronizeSymbolNames(options?:Pages.PageDataEnumerationOptions): number[];
+    change(pageNumber: number): void;
+    open(pageNumber: number, options?:Pages.PageStateOptions): void;
     setName(newName: string);
     setExportFormat(options?: ExportPageFormat);
     setExportFormatAsPNG24();
     setExportFormatAsPNG32();
     verticalTrim();
+}
+
+export default interface PagesInternal {
+    getRange(options:Pages.PageRangeOptions, count?: number): Pages.PageRange;
+    each(callback: Pages.PageCallbacks, options?:Pages.PageDataEnumerationOptions);
+    withPage(callback: Pages.PageCallbacks, options?:Pages.PageStateOptions);
 }

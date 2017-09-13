@@ -1,3 +1,4 @@
+
 declare namespace OrangeCommands.Pages {
     import SymbolInfo = OrangeCommands.Elements.SymbolInfo;
 
@@ -6,13 +7,38 @@ declare namespace OrangeCommands.Pages {
         name: string;
     }
 
-    interface PageEnumerationOptions {
+    interface PageRange {
+        start?: number;
+        end?: number;
+    }
+    interface PageRangeOptions extends PageRange {
+        max?: number;
+    }
+    interface PageEnumerationOptions extends PageRangeOptions {
         currentOnly?: boolean;
         skipMaster?: boolean;
-        max?: number;
-        start?: number;
-        data?: PageDataOptions;
     }
+
+    interface PageDataEnumerationOptions extends PageEnumerationOptions {
+        data?: PageStateOptions;
+    }
+    // type PageCallback = Function |
+    //     ((this: OrangeCommands.Page, page: OrangeCommands.Page) => void);
+    // type PageElementsCallback = Function |
+    //     ((this: OrangeCommands.PageElementState, page: OrangeCommands.PageElementState) => void);
+    interface PageCallbackInterface extends Function {
+        (this: OrangeCommands.Page): void;
+        (this: OrangeCommands.Page, page: OrangeCommands.Page): void;
+    }
+
+    interface PageElementsCallbackInterface extends Function{
+        (this: OrangeCommands.PageElementState): void;
+        (this: OrangeCommands.PageElementState, page: OrangeCommands.PageElementState): void;
+    }
+    type PageCallback = Function | PageCallbackInterface;
+    type PageElementsCallback = Function | PageElementsCallbackInterface;
+
+    type PageCallbacks = Function | PageCallback | PageElementsCallback;
 
     interface PageCollection<T> {
         [index: number]: T;
@@ -38,13 +64,14 @@ declare namespace OrangeCommands.Pages {
         sort?: keyof SymbolInfo | keyof PageSummary;
     }
     interface PagesSummaryOptions {
-        pages?: PageEnumerationOptions;
+        pages?: PageDataEnumerationOptions;
         summary?:PageSummaryOptions;
     }
 
-    interface PageDataOptions {
+    interface PageStateOptions {
         symbols?: Elements.SymbolDataOptions,
         symbolInfo?: Elements.SymbolDataOptions
         asPageElement?: boolean;
+        layers?: LayerElementDataOptions;
     }
 }
