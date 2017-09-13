@@ -5,14 +5,24 @@ declare global {
 
     interface ImportPagesOptions {
         range?: Pages.PageEnumerationOptions;
-        options?: ImportPageOptions;
+        'import'?: ImportPageOptions;
     }
 
     interface ImportPageOptions {
         boundingRectangle?: PixelRectangle;
         maintainAspectRatio?:boolean;
+        /**
+         * Page Number, starting from 1
+         */
         pageNumber?:number;
         insertAfterCurrentPage?:boolean;
+        exportFormat?: ExportPageFormat;
+    }
+
+    interface InsertSymbolOptions {
+        location?: Point;
+        newPage?: boolean;
+        fitToCanvas?: boolean;
         exportFormat?: ExportPageFormat;
     }
 
@@ -35,8 +45,11 @@ declare global {
         outputDirectory?: RegExp;
         outputDirectoryReplacement?: string;
     }
-
-    export interface RenamePagesOptions {
+    export interface RegexRule {
+        search: RegExp;
+        replacement: string;
+    }
+    export interface RenameOptions {
         pattern: string;
         replacement: string;
         defaultPattern?: string;
@@ -45,7 +58,17 @@ declare global {
             options?: boolean;
             newName?: boolean;
         };
+    }
+
+    export interface RenameState {
+        enabled?: boolean;
+        options?: RenameOptions,
+        rule?: RegexRule | null
+    }
+
+    export interface RenamePagesOptions extends RenameOptions {
         currentPageOnly?: boolean;
+        prompt?: boolean;
     }
 
     interface ExportPagesOptions {
@@ -92,6 +115,9 @@ declare global {
     interface OperationState {
         completed: number,
         number: number,
+    }
+
+    interface PageOperationState extends OperationState {
         page: PageInfo,
         extension?: string;
     }
@@ -103,5 +129,10 @@ declare global {
         CURRENT_PAGE: 'currentPage',
         PROMPT_PREFIX: 'promptPrefix',
         PROMPT_FOLDER: 'promptFolder'
+    }
+    interface ExportFormats {
+        CURRENT: 'CURRENT',
+        PNG24: 'PNG24',
+        PNG32: 'PNG32'
     }
 }

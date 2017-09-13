@@ -12,6 +12,7 @@ declare namespace OrangeCommands.Pages {
         end?: number;
     }
     interface PageRangeOptions extends PageRange {
+        offset?: number;
         max?: number;
     }
     interface PageEnumerationOptions extends PageRangeOptions {
@@ -21,6 +22,7 @@ declare namespace OrangeCommands.Pages {
 
     interface PageDataEnumerationOptions extends PageEnumerationOptions {
         data?: PageStateOptions;
+        currentOnly?: boolean;
     }
     // type PageCallback = Function |
     //     ((this: OrangeCommands.Page, page: OrangeCommands.Page) => void);

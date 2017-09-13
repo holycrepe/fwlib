@@ -1,11 +1,11 @@
 export default interface Selection extends OrangeCommands.OcElementData {
     stored_selection: {};
-    current: Element[];
-    all: Element[];
-    selectAll(): Element[];
-    getAll(persist?: boolean): Element[];
-    getCurrent(): Element[];
-    clone(): Element[];
+    current: Fw.FwSelection[];
+    all: Fw.FwSelection[];
+    selectAll(): Fw.FwSelection[];
+    getAll(persist?: boolean): Fw.FwSelection[];
+    getCurrent(): Fw.FwSelection[];
+    clone(): Fw.FwSelection[];
     get_bounds(): PixelRectangle;
     width(): number;
     height(): number;

@@ -8,7 +8,7 @@ export default interface PageData extends OrangeCommands.OcElementSnapshot {
     readonly elementCount: number;
 }
 
-export default interface Page extends PageData, OrangeCommands.OcElementData {
+export default interface PageStatic extends PageData, OrangeCommands.OcElementData {
     getInfo(options?:Pages.PageStateOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
     getElementCount(): number;
     verticalTrim();
@@ -17,9 +17,12 @@ export default interface Page extends PageData, OrangeCommands.OcElementData {
     setExportFormatAsPNG32();
     getSymbolInfo(): Elements.SymbolInfo[];
     getSymbols(): Elements.Symbol[];
+
+    synchronizeSymbolNames(options?:Pages.PageDataEnumerationOptions): string[];
+    copySymbols(options?: InsertSymbolOptions);
 }
 
-export default class PageClass implements Page {
+export default class PageClass implements PageStatic {
     readonly originalName: string;
     readonly name: string;
     readonly index: number;
@@ -28,7 +31,7 @@ export default class PageClass implements Page {
     readonly elementCount: number;
     readonly symbolInfo: Elements.SymbolInfo[];
     readonly symbols: Elements.Symbol[];
-    readonly elements: Element[];
+    readonly elements: Fw.FwElement[];
     readonly elementData: LayerElementData;
 
     setName(newName: string);
@@ -40,10 +43,14 @@ export default class PageClass implements Page {
     setExportFormatAsPNG24();
     setExportFormatAsPNG32();
 
-    getElements(ignoreWebLayers?: boolean): Element[];
-    getElementData(ignoreWebLayers?: boolean): LayerElementData;
-    getSymbolInfo(): Elements.SymbolInfo[];
-    getSymbols(): Elements.Symbol[];
+    getElements(options?:LayerElementDataOptions): Fw.FwElement[];
+    getElementData(options?:LayerElementDataOptions): LayerElementData;
+    getSymbolInfo(options?:Elements.SymbolDataOptions): Elements.SymbolInfo[];
+    getSymbols(options?:Elements.SymbolDataOptions): Elements.Symbol[];
+
+    renameSymbols(options?:Elements.SymbolDataOptions): string[];
+    synchronizeSymbolNames(options?:Elements.SymbolDataOptions): string[];
+    copySymbols(options?: InsertSymbolOptions);
 }
 
 
@@ -55,7 +62,7 @@ export default class PageState implements PageData {
     number: number;
     isMaster: boolean;
     elementCount: number;
-    elements: Element[];
+    elements: Fw.FwElement[];
     elementData: LayerElementData;
     symbolInfo: OrangeCommands.Elements.SymbolInfo[];
     symbols: OrangeCommands.Elements.Symbol[];

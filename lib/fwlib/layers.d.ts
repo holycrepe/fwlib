@@ -79,7 +79,7 @@
 export interface LayerElementData {
     count: number
     names: string[],
-    elements: Element[]
+    elements: Fw.FwElement[]
 }
 export interface LayerElementDataOptions {
     includeWebLayers?: boolean;
@@ -94,8 +94,8 @@ export class Layer {
     index: number;
     sublayerIndex: number;
     parent: Layer;
-    readonly allElements: Element[];
-    readonly elements: Element[];
+    readonly allElements: Fw.FwElement[];
+    readonly elements: Fw.FwElement[];
     readonly elemsandsublayers: Array;
     readonly elemsIndex: number;
     readonly isTopLayer: boolean;
@@ -122,19 +122,19 @@ export class LayerTree {
     currentLayer: Layer;
     currentTopLayer: Layer;
     readonly elementData: LayerElementData;
-    readonly elements: Element[];
+    readonly elements: Fw.FwElement[];
     readonly layers: Layer[];
     readonly topLayers: Layer[];
     readonly webLayer: Layer;
     readonly webLayers: Layer[];
-    getContainingLayer(inElement:Element): Layer;
+    getContainingLayer(inElement:Fw.FwElement): Layer;
     layer(inIndex:number|string): Layer;
     refresh(): void;
 }
 
 
-export function getElements(dom?:Fw.FwDocument, options?: LayerElementDataOptions): Element[];
-export function getElementData(elementsOrDom?:Fw.FwDocument|Element[], options?: LayerElementDataOptions): LayerElementData;
+export function getElements(dom?:Fw.FwDocument, options?: LayerElementDataOptions): Fw.FwElement[];
+export function getElementData(elementsOrDom?:Fw.FwDocument|Fw.FwElement[], options?: LayerElementDataOptions): LayerElementData;
 export function alertLayers (inDom:Fw.FwDocument, inJustReturnOutput: boolean): string;
 export function copyLayer(inLayer:Layer, inTargetDom:Fw.FwDocument, inSourceDom:Fw.FwDocument): void;
 export function copyLayerBetweenPages(inLayer:Layer, inSourcePageIndex:number, inTargetPageIndex:number): void;

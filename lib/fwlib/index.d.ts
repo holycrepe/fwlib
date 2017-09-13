@@ -2,8 +2,8 @@
 import {Layer, LayerElementData} from "layers"
 declare module fwlib {
     export interface layers {
-        getElements(dom?:Fw.FwDocument, includeWebLayers?:boolean): Element[];
-        getElementData(dom?:Fw.FwDocument, includeWebLayers?:boolean): LayerElementData;
+        getElements(dom?:Fw.FwDocument, options?:LayerElementDataOptions): Fw.FwElement[];
+        getElementData(dom?:Fw.FwDocument, options?:LayerElementDataOptions): LayerElementData;
         alertLayers (inDom:Fw.FwDocument, inJustReturnOutput: boolean): string;
         copyLayer(inLayer:Layer, inTargetDom:Fw.FwDocument, inSourceDom:Fw.FwDocument): void;
         copyLayerBetweenPages(inLayer:Layer, inSourcePageIndex:number, inTargetPageIndex:number): void;

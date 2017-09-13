@@ -8,11 +8,11 @@ declare namespace OrangeCommands {
         getSymbols(options?:Elements.SymbolDataOptions): Elements.Symbol[];
     }
     interface OcElementSnapshot extends OcSymbolSnapshot {
-        readonly elements: Element[];
+        readonly elements: Fw.FwElement[];
         readonly elementData: LayerElementData,
     }
     interface OcElementData extends OcSymbolInfo, OcElementSnapshot {
-        getElements(options?:LayerElementDataOptions): Element[];
+        getElements(options?:LayerElementDataOptions): Fw.FwElement[];
         getElementData(options?:LayerElementDataOptions): LayerElementData;
     }
 }

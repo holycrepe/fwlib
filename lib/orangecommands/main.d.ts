@@ -3,7 +3,6 @@
 
 import Elements = OrangeCommands.Elements;
 import Pages = OrangeCommands.Pages;
-import Page = OrangeCommands.Page;
 import PageElementState = OrangeCommands.PageElementState;
 
 declare namespace OrangeCommands {
@@ -34,7 +33,7 @@ declare namespace OrangeCommands {
     import { DocumentStatic as Document  } from "./Document";
     import { ElementsStatic as Elements  } from "./Elements";
     import { PagesStatic as Pages } from "./Pages";
-    import { PageClass as Page, PageData as PageElementState } from "./Page";
+    import { PageStatic as Page, PageData as PageElementState } from "./Page";
     import { Guides } from "./Guides";
     import { Selection } from "./Selection";
 
@@ -89,6 +88,7 @@ declare global {
             state: {}
         };
     }
+    export { PagesStatic as Pages } from "./Pages";
 }
 declare namespace orangecommands {
     export const VERSION: string;

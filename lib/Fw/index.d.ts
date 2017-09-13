@@ -14,15 +14,19 @@ declare namespace Fw {
         align(alignmode:AlignmentMode, alignToCanvas?:boolean);
         changeCurrentPage(pageNum: number);
         clipCopyJsToExecute(code:string);
+        clipPaste();
         deletePageAt(pageNum: number);
         exitSymbolEdit(level?:number)
         flattenSelection();
         getSelectionBounds():PixelRectangle;
         hasMasterPage(): boolean;
         importFile(fileURL:string, boundingRectangle?:PixelRectangle, bMaintainAspectRatio?:boolean, pageNumber?:number, insertAfterCurrentPage?:boolean);
+        importSymbol(fileURL:string, addToDoc?:boolean, allowUISelection?:boolean);
         InsertPageForImport(fileURL:string, pageNumber?:number);
+        insertSymbolAt(symbolName:string, locationPoint:Point);
         moveSelectionBy(delta:Point, bMakeCopy?:boolean, doSubSel?:boolean);
         removeAllGuides(guidekind?:GuideKind);
+        setMasterPage(pageNumber: number);
         reorderPages(origPos: number, newPos: number);
         resizeSelection(width: number, height: number);
         selectAll();
@@ -37,9 +41,11 @@ declare namespace Fw {
         setElementName(name: string);
         setElementVisibleByName(name: string, bShow:boolean);
         setExportOptions(options: ExportOptions);
+        setExportSettings(options: ExportSettings);
         setMatteColor(bUseMatteColor:boolean, matteColor:string);
         setPageName(pageNum: number, newName: string);
         setShowGuides(value:boolean);
+        setSymbolProperties(currentName:string, symbolType:SymbolType, newName:string, nineSliceScalingStatus?: boolean)
         setTextLeading(leadingValue:number, leadingMode:TextLeadingMode);
         setTextRuns(text);
     }
@@ -51,7 +57,22 @@ declare namespace Fw {
         units: ResolutionUnits
     }
     type FwColorString = string;
-    type FwSelection = Element | Text;
+
+    export interface ImageElement extends Element {
+        smartShapeCode?: string;
+    }
+    export interface UnknownElement extends Element  {
+        transform: Fw.ElementTransform,
+        transformMode: string,
+        urlText: string,
+        javascriptString: string
+        locked: boolean,
+        targetText: string,
+    }
+    interface FwElement extends Element, Instance, Text, ImageElement, UnknownElement{
+
+    }
+    type FwSelection = FwElement;
     type FileBrowseType = 'open' | 'select' | 'save';
     type TextAttrLeadingMode = 'percentage';
     type TextLeadingMode = 'exact' | TextAttrLeadingMode;
@@ -64,6 +85,9 @@ declare namespace Fw {
     }
 
     export interface ExportOptions extends Object {
+
+    }
+    export interface ExportSettings extends Object {
 
     }
     export interface PngText {
@@ -206,18 +230,7 @@ declare interface Size {
     height: number
 }
 declare global {
-    export interface FwElementImage {
-        smartShapeCode?: string;
-    }
-    export interface FwElementUnknown {
-        transform: Fw.ElementTransform,
-        transformMode: string,
-        urlText: string,
-        javascriptString: string
-        locked: boolean,
-        targetText: string,
-    }
-    export interface Element extends FwElementImage, FwElementUnknown {
+    export interface Element {
         altText: string,
         blendMode: string,
         customData: any,
@@ -241,7 +254,7 @@ declare global {
     export interface Instance extends Element {
         symbolID: string,
         symbolName: string,
-        instanceType: string,
+        instanceType: Fw.SymbolType,
     }
     export interface Text extends Element {
         antiAliased: boolean,
@@ -254,7 +267,6 @@ declare global {
         textureOffset: Point
         transformMode: Fw.TextTransformMode,
     }
-
     export interface FwCommands {
 
     }

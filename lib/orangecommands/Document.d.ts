@@ -3,9 +3,17 @@
 export default interface DocumentStatic extends OrangeCommands.OcElementData {
     OrangeCommandsModuleTest();
     ExportPagesFlags: ExportPagesFlags;
-    importPages(path: string, options: RenamePagesOptions);
-    importPage(path: string, pageNumber?: number);
+    ExportFormats: ExportFormats;
+    importPages(path: string, options?: ImportPagesOptions);
+    /**
+     *
+     * @param {string} path
+     * @param {number} pageNumber Page Number, starting from 1
+     * @param {ImportPageOptions} options
+     */
+    importPage(path: string, pageNumber?: number, options?: ImportPageOptions);
     renamePages(options: RenamePagesOptions);
+    insertSymbols(names: string[], options?: InsertSymbolOptions);
     getExportOptions(options?: ExportPagesOptions): ExportPagesOptions;
     exportAllPages(options?: ExportPagesOptions);
     exportMainPages(options?: ExportPagesOptions);
@@ -14,8 +22,8 @@ export default interface DocumentStatic extends OrangeCommands.OcElementData {
     // exportPagesAuto(options?: ExportPagesOptions);
     // exportPagesToFolder(options?: ExportPagesOptions);
     // exportPagesWithPrefix(options?: ExportPagesOptions);
-    exportPage(path?: string, options?: ExportPagesOptions, operationState?: OperationState): void;
-    exportPageAuto(options?: ExportPagesOptions, operationState?: OperationState);
+    exportPage(path?: string, options?: ExportPagesOptions, operationState?: PageOperationState): void;
+    exportPageAuto(options?: ExportPagesOptions, operationState?: PageOperationState);
     // exportPageToFolder(options?: ExportPagesOptions);
     isMasterPage(): boolean;
     isOpen(): boolean;

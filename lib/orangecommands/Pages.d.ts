@@ -7,7 +7,7 @@ export default interface PagesStatic {
     getInfo(): Pages.PageInfo;
 
 
-    getElements(options?:Pages.PageDataEnumerationOptions): Element[];
+    getElements(options?:Pages.PageDataEnumerationOptions): Fw.FwElement[];
     getElementData(options?:Pages.PageDataEnumerationOptions): LayerElementData;
 
     each(callback: Pages.PageCallback, options?:Pages.PageDataEnumerationOptions);
@@ -19,10 +19,13 @@ export default interface PagesStatic {
     getSummary(options?:Pages.PagesSummaryOptions): Pages.PageCollectionSummary;
     summarize(pages: Pages.PageCollectionElements, options?:Pages.PageSummaryOptions): Pages.PageCollectionSummary;
     summarizePage(page: OrangeCommands.PageElementState, options?:Pages.PageSummaryOptions): Pages.PageSummary;
+    renameSymbols(options?:Pages.PageDataEnumerationOptions): number[];
     synchronizeSymbolNames(options?:Pages.PageDataEnumerationOptions): number[];
     change(pageNumber: number): void;
     open(pageNumber: number, options?:Pages.PageStateOptions): void;
-    setName(newName: string);
+    setName(newName: string, dom?: Fw.FwDocument);
+    fitCanvas(dom?: Fw.FwDocument);
+    trimCanvas(dom?: Fw.FwDocument);
     setExportFormat(options?: ExportPageFormat);
     setExportFormatAsPNG24();
     setExportFormatAsPNG32();

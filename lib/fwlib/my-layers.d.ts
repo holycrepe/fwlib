@@ -1,7 +1,7 @@
 declare interface LayerElementData {
     count: number
     names: string[],
-    elements: Element[]
+    elements: Fw.FwElement[]
 }
 declare interface LayerElementDataOptions {
     includeWebLayers?: boolean;
