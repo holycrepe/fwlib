@@ -184,6 +184,7 @@ declare global {
         exportDocumentAs(document?: Fw.FwDocument | null, fileURL?: string | null, exportOptions?: Fw.ExportOptions | null);
         runScript(path: string);
         copy(code: string);
+        yesNoDialog(promptString:string): boolean;
     }
 
     export interface Files {
