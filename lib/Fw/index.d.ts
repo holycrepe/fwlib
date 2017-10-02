@@ -38,6 +38,16 @@ declare namespace Fw {
         setDocumentCanvasSizeToSelection();
         setDocumentImageSize(boundingRectangle:PixelRectangle, resolution: Resolution, currentPageOnly?:boolean);
         setDocumentResolution(resolution:Resolution);
+        /**
+         *
+         * @param {number} frameNum A zero-based integer that specifies the frame that contains the element or elements to be locked. To specify the current frame, pass -1.
+         * @param {number} layerNum A zero-based integer that specifies the layer that contains the element or elements to be locked. To specify the current layer, pass -1.
+         * @param {number} objectIndex A zero-based integer that specifies the element or elements to lock or unlock. 0 represents the topmost element in the specified layer. To lock or unlock all the elements in the specified layer, pass -1.
+         * @param {boolean} lock If true, the element or elements are to be locked; if false, the elements are unlocked.
+         * @param {boolean} allLayers If true, all layers are specified; false otherwise.
+         * @param {boolean} lockLayers If true, locks all layers; false otherwise.
+         */
+        setElementLocked(frameNum:number, layerNum:number, objectIndex:number, lock:boolean, allLayers:boolean, lockLayers:boolean);
         setElementName(name: string);
         setElementVisibleByName(name: string, bShow:boolean);
         setExportOptions(options: ExportOptions);
