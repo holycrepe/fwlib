@@ -28,6 +28,13 @@ declare module fwlib {
         methods: ExtensionCommandMapping;
         state: ExtensionState;
     }
+    export type ColorRGBA = [number, number, number, number];
+    interface RgbaArray {
+        0: number;
+        1: number;
+        2: number;
+        3: number;
+    }
     export class Logger {
         constructor(section?: string|string[], verbosity?: number|boolean, defaultLogLevel?: number);
         group(name: string);
@@ -58,6 +65,15 @@ declare module fwlib {
         capitalizeWords(subject: string): string;
         proxifyDom(dom?): string;
         proxify(obj?): object;
+
+        defineClass<T>(inConstructor:Function, inPrototype:object, inSuper?: object): T;
+        hexToRGBA(hex: string, alpha?: number): ColorRGBA;
+        hexToRGBAString(hex: string, alpha?: number): string;
+        parsePercentage(value:number, range?: number):number;
+        reducePrecision(value:number):number;
+        trim(subject:string):string;
+        supplant(template:string, replacements?: object): string;
+
         dump(obj): void;
         benchmark(func:Function);
         isArray(arg: any): boolean;
