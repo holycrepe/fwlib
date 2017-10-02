@@ -84,6 +84,7 @@ declare namespace Fw {
     }
     type FwSelection = FwElement;
     type FileBrowseType = 'open' | 'select' | 'save';
+    type FileFormatName = "ADOBE AI3" | "Fireworks JavaScript" | "kMoaCfFormat_BMP" | "kMoaCfFormat_FreeHand7and8" | "kMoaCfFormat_GIF" | "kMoaCfFormat_JPEG" | "kMoaCfFormat_PICT" | "kMoaCfFormat_RTF" | "kMoaCfFormat_Text" | "kMoaCfFormat_TIFF" | "PNG" | "PS30";
     type TextAttrLeadingMode = 'percentage';
     type TextLeadingMode = 'exact' | TextAttrLeadingMode;
     type GuideKind = 'horizontal' | 'vertical';
@@ -190,6 +191,7 @@ declare global {
         getDocumentDOM(): Fw.FwDocument;
         browseForFolderURL(title?: string, startFolder?: string | null): string;
         browseForFileURL(browseType: Fw.FileBrowseType, title?, previewArea?);
+        locateDocDialog(maxNumDocs: number, formatList:Fw.FileFormatName[]);
         getDocumentPath(document?: Fw.FwDocument): string;
         exportDocumentAs(document?: Fw.FwDocument | null, fileURL?: string | null, exportOptions?: Fw.ExportOptions | null);
         runScript(path: string);
