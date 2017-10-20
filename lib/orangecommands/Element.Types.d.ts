@@ -1,4 +1,8 @@
 declare namespace OrangeCommands.Elements {
+    export interface ElementIdentifierMatch {
+        success: boolean;
+        value?: Fw.FwElement;
+    }
     export interface SymbolInfo {
         id: string;
         name: string;
@@ -15,5 +19,13 @@ declare namespace OrangeCommands.Elements {
         includeElementReference?: boolean;
         layers?: LayerElementDataOptions;
         rename?: RenameState
+    }
+    export type AlignmentMode = Fw.AlignmentMode | 'center';
+    export type FitToCanvasMode = 'grow' | 'shrink' | 'both';
+    export interface RepositionOptions {
+        align?: boolean;
+        alignment?: AlignmentMode
+        fitToCanvas?: boolean;
+        fitToCanvasMode?: FitToCanvasMode;
     }
 }

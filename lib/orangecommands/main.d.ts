@@ -1,11 +1,14 @@
 ///<reference path="../Fw/index.d.ts"/>
 
 
-import Elements = OrangeCommands.Elements;
-import Pages = OrangeCommands.Pages;
-import PageElementState = OrangeCommands.PageElementState;
+// import Elements = OrangeCommands.Elements;
+//import Pages = OrangeCommands.Pages;
+//import PageElementState = OrangeCommands.PageElementState;
 
-declare namespace OrangeCommands {
+
+import PageStaticImpl from "./Page";
+
+export namespace OrangeCommands {
     /**
      * Color Interface
      */
@@ -30,36 +33,36 @@ declare namespace OrangeCommands {
     export interface FW {
         getTMP();
     }
-    import { DocumentStatic as Document  } from "./Document";
-    import { ElementsStatic as Elements  } from "./Elements";
-    import { PagesStatic as Pages } from "./Pages";
-    import { PageStatic as Page, PageData as PageElementState } from "./Page";
-    import { Guides } from "./Guides";
-    import { Selection } from "./Selection";
+    import DocumentStatic from "./Document";
+    import ElementsStatic from "./Elements";
+    import PagesStatic from "./Pages";
+    import PageStatic from "./Page";
+    import Guides from "./Guides";
+    import Selection from "./Selection";
 
     export interface OrangeCommandsStatic {
         VERSION: string;
         params: any;
-        /*** Color Static */
-        Color: Color;
         /*** Document Static */
-        Document: Document;
-        /*** Pages Static */
-        Pages: Pages;
-        /*** Page Class Static */
-        Page: Page;
+        Document: DocumentStatic;
         /*** Elements Static */
-        Elements: Elements;
+        Elements: ElementsStatic;
+        /*** Page Class Static */
+        Page: PageStatic;
+        /*** Pages Static */
+        Pages: PagesStatic;
         /*** Selection Static */
         Selection: Selection;
+        /*** Color Static */
+        Color: Color;
         /*** Guides Static */
         Guides: Guides;
-        /*** UI Static */
-        UI: UI;
-        /*** Sort Static */
-        Sort: Sort;
         /*** File Static */
         File: File;
+        /*** Sort Static */
+        Sort: Sort;
+        /*** UI Static */
+        UI: UI;
         /*** User Static */
         User: User;
         /*** FW Static */
@@ -67,7 +70,7 @@ declare namespace OrangeCommands {
     }
 }
 
-declare global {
+global {
     export interface Element {
         resize(width: number, height: number): void;
         kind(): string;
@@ -88,14 +91,25 @@ declare global {
             state: {}
         };
     }
-    export { PagesStatic as Pages } from "./Pages";
+
+    export const Document: OrangeCommands.DocumentStatic;
+    export const Elements: OrangeCommands.ElementsStatic;
+    export const Page: PageStaticImpl;
+    export const Pages: OrangeCommands.PagesStatic;
+    export const Selection: OrangeCommands.Selection;
+    export const Color: OrangeCommands.Color;
+    export const Guides: OrangeCommands.Guides;
+    export const Sort: OrangeCommands.Sort;
+    export const UI: OrangeCommands.UI;
+    export const User: OrangeCommands.User;
+    export const FW: OrangeCommands.FW;
 }
-declare namespace orangecommands {
+export namespace orangecommands {
     export const VERSION: string;
     export const params: {};
     export function run();
 }
-declare global {
+export global {
     export interface FwStatic {
         orangecommands: OrangeCommands.OrangeCommandsStatic;
     }

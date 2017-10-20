@@ -1,7 +1,15 @@
+import {OrangeCommands} from "./Pages.Types";
+
 declare global {
-    import PageInfo = OrangeCommands.Pages.PageInfo;
+
+    import Pages = OrangeCommands.Pages;
 
     type ExportPageFormat = 'CURRENT' | 'PNG24' | 'PNG32' | object;
+
+    interface Position {
+        size: Size;
+        bounds: PixelRectangle;
+    }
 
     interface ImportPagesOptions {
         range?: Pages.PageEnumerationOptions;
@@ -21,8 +29,12 @@ declare global {
 
     interface InsertSymbolOptions {
         location?: Point;
+        preserveNamePrefix?: boolean;
+        ignoredNames?: string[];
         newPage?: boolean;
         fitToCanvas?: boolean;
+        reverse?: boolean;
+        reverseLayers?: boolean;
         exportFormat?: ExportPageFormat;
     }
 
@@ -118,7 +130,7 @@ declare global {
     }
 
     interface PageOperationState extends OperationState {
-        page: PageInfo,
+        page: Pages.PageInfo,
         extension?: string;
     }
 

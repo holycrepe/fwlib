@@ -1,10 +1,15 @@
 
+import {OrangeCommands} from "./Pages.Types";
+import Pages = OrangeCommands.Pages;
+import PageInfo = Pages.PageInfo;
+import PageData from "./Page";
+
 export default interface PagesStatic {
     lastPageIndex: number;
     count: number;
-    info: Pages.PageInfo;
+    info: PageInfo;
     getCount(): number;
-    getInfo(): Pages.PageInfo;
+    getInfo(): PageInfo;
 
 
     getElements(options?:Pages.PageDataEnumerationOptions): Fw.FwElement[];
@@ -15,10 +20,10 @@ export default interface PagesStatic {
     withPage(callback: Pages.PageCallback);
     withPageElements(callback: Pages.PageElementsCallback);
     getPageElements(options?:Pages.PageDataEnumerationOptions): Pages.PageCollectionElements;
-    getPageElementsList(options?:Pages.PageDataEnumerationOptions): OrangeCommands.PageElementState[];
+    getPageElementsList(options?:Pages.PageDataEnumerationOptions): PageData[];
     getSummary(options?:Pages.PagesSummaryOptions): Pages.PageCollectionSummary;
     summarize(pages: Pages.PageCollectionElements, options?:Pages.PageSummaryOptions): Pages.PageCollectionSummary;
-    summarizePage(page: OrangeCommands.PageElementState, options?:Pages.PageSummaryOptions): Pages.PageSummary;
+    summarizePage(page: PageData, options?:Pages.PageSummaryOptions): Pages.PageSummary;
     renameSymbols(options?:Pages.PageDataEnumerationOptions): number[];
     synchronizeSymbolNames(options?:Pages.PageDataEnumerationOptions): number[];
     change(pageNumber: number): void;

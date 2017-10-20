@@ -1,4 +1,6 @@
 
+import PageStatic, {default as PageData} from "./Page";
+
 declare namespace OrangeCommands.Pages {
     import SymbolInfo = OrangeCommands.Elements.SymbolInfo;
 
@@ -29,13 +31,13 @@ declare namespace OrangeCommands.Pages {
     // type PageElementsCallback = Function |
     //     ((this: OrangeCommands.PageElementState, page: OrangeCommands.PageElementState) => void);
     interface PageCallbackInterface extends Function {
-        (this: OrangeCommands.Page): void;
-        (this: OrangeCommands.Page, page: OrangeCommands.Page): void;
+        (this: PageStatic): void;
+        (this: PageStatic, page: PageStatic): void;
     }
 
     interface PageElementsCallbackInterface extends Function{
-        (this: OrangeCommands.PageElementState): void;
-        (this: OrangeCommands.PageElementState, page: OrangeCommands.PageElementState): void;
+        (this: PageData): void;
+        (this: PageData, page: PageData): void;
     }
     type PageCallback = Function | PageCallbackInterface;
     type PageElementsCallback = Function | PageElementsCallbackInterface;
@@ -45,7 +47,7 @@ declare namespace OrangeCommands.Pages {
     interface PageCollection<T> {
         [index: number]: T;
     }
-    interface PageCollectionElements extends PageCollection<OrangeCommands.PageElementState> {
+    interface PageCollectionElements extends PageCollection<PageData> {
 
     }
     interface PageCollectionSummary extends PageCollection<PageSummary> {
@@ -55,7 +57,7 @@ declare namespace OrangeCommands.Pages {
         number: number,
         name?: string;
         names?: string[],
-        symbols?: OrangeCommands.Elements.SymbolInfo[]
+        symbols?: SymbolInfo[]
     }
     interface PageSummaryOptions {
         excludeSymbols?: boolean;

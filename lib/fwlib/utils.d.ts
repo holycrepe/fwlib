@@ -37,6 +37,74 @@ declare module fwlib {
     }
     export class Logger {
         constructor(section?: string|string[], verbosity?: number|boolean, defaultLogLevel?: number);
+        private _sections: string[];
+        private updatePrefixes();
+        isActive(level?:number|boolean): boolean;
+
+        /**
+         * Checks if Logger is enabled
+         * Uses the Logger's Current Verbosity and Default Log Level.
+         */
+        get active();
+
+        /**
+         * Log Level above which messages will be ignored.
+         * If true or -1, messages are never ignored
+         * If false or 0, messages are always ignored.
+         */
+        get verbosity(value: number|boolean);
+
+        /**
+         * Sets Verbosity: Log Level above which messages will be ignored.
+         * If true or -1, messages are never ignored
+         * If false or 0, messages are always ignored.
+         */
+        set verbosity(value: number|boolean);
+
+        /**
+         * Log Level used by log().
+         * Default Level is 4
+         */
+        get level(): number;
+
+        /**
+         * Sets Level: Log Level used by log().
+         * Default Level is 4
+         */
+        set level(value:number): number;
+
+        /**
+         * Gets the Sections of the Logger as a single string,
+         * delimited by colons (': ')
+         * @return {string}
+         */
+        get section(): string;
+
+        /**
+         * Sets the Sections of the Logger from a string.
+         * @param value {string}
+         */
+        set section(value: string);
+
+        /**
+         * Gets the Sections of the Logger as an array of strings.
+         * @return {string[]}
+         */
+        get sections(): string;
+
+        /**
+         * Sets the Sections of the Logger from a string or array of strings.
+         * @param value {string|string[]}
+         */
+        set sections(value: string|string[]);
+
+        /**
+         * Gets the Groups of the Logger as an array of strings.
+         * @return {string[]}
+         */
+        get groups(): string;
+
+
         group(name: string);
         ungroup();
         log(level?: number, ...args: any[]);
@@ -45,7 +113,9 @@ declare module fwlib {
         warn(...args: any[]);
         info(...args: any[]);
         debug(...args: any[]);
+        trace(...args: any[]);
         noop(...args: any[]);
+
     }
     export interface utils {
         runCommand(extension: ExtensionInfo, cmdName?: string): boolean|string;
@@ -63,6 +133,7 @@ declare module fwlib {
         capitalizeFirstLetter(subject: string): string;
         capitalize(subject: string): string;
         capitalizeWords(subject: string): string;
+        getCommonPrefix(strings: string[]): string;
         proxifyDom(dom?): string;
         proxify(obj?): object;
 

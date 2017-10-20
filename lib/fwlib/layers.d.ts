@@ -83,6 +83,7 @@ export interface LayerElementData {
 }
 export interface LayerElementDataOptions {
     includeWebLayers?: boolean;
+    reverseLayers?: boolean;
 }
 export class Layer {
     constructor(inConfig);
@@ -128,6 +129,8 @@ export class LayerTree {
     readonly webLayer: Layer;
     readonly webLayers: Layer[];
     getContainingLayer(inElement:Fw.FwElement): Layer;
+    getElements(options?:LayerElementDataOptions): Fw.FwElement[];
+    getElementData(options?:LayerElementDataOptions): LayerElementData;
     layer(inIndex:number|string): Layer;
     refresh(): void;
 }

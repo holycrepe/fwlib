@@ -11,6 +11,12 @@ declare namespace fwlib {
         getSize(inFilePath:string|string[], unit?: ''|'B'|'KB'|'MB'|'GB'|'TB'):number|string;
         copyDirectoryContents(fromPath:string|string[], sourcePath:string|string[]):void;
         getCurrentScriptUrl(errorFunction: Function): string;
+        /**
+         * Returns the extension in uppercasee, without leading period, e.g. 'PNG'
+         * @param {string} fileName
+         * @return {string}
+         */
+        getFileType(fileName: string): string;
         getCurrentScriptDirectory(errorFunction: Function): string;
         getCurrentScriptFilename(errorFunction: Function): string;
         createTempDirectory(): string;

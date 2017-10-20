@@ -1,5 +1,12 @@
 
-export default interface PageData extends OrangeCommands.OcElementSnapshot {
+import {OrangeCommands} from "./Pages.Types";
+import Pages = OrangeCommands.Pages;
+import OcElementSnapshot = OrangeCommands.OcElementSnapshot;
+import OcElementData = OrangeCommands.OcElementData;
+import Elements = OrangeCommands.Elements;
+import SymbolInfo = OrangeCommands.Elements.SymbolInfo;
+
+export interface PageData extends OcElementSnapshot {
     readonly originalName: string;
     readonly name: string;
     readonly index: number;
@@ -8,20 +15,23 @@ export default interface PageData extends OrangeCommands.OcElementSnapshot {
     readonly elementCount: number;
 }
 
-export default interface PageStatic extends PageData, OrangeCommands.OcElementData {
-    getInfo(options?:Pages.PageStateOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
+export interface PageStaticImpl extends PageData, OcElementData {
+    getInfo(options?:Pages.PageStateOptions): PageClass|PageData;
     getElementCount(): number;
     verticalTrim();
     setExportFormat(options?: ExportPageFormat);
     setExportFormatAsPNG24();
     setExportFormatAsPNG32();
-    getSymbolInfo(): Elements.SymbolInfo[];
+    getSymbolInfo(): SymbolInfo[];
     getSymbols(): Elements.Symbol[];
 
     synchronizeSymbolNames(options?:Pages.PageDataEnumerationOptions): string[];
     copySymbols(options?: InsertSymbolOptions);
 }
 
+export interface PageStatic extends PageStaticImpl {
+
+}
 export default class PageClass implements PageStatic {
     readonly originalName: string;
     readonly name: string;
@@ -36,7 +46,7 @@ export default class PageClass implements PageStatic {
 
     setName(newName: string);
 
-    getInfo(options?:Pages.PageStateOptions): OrangeCommands.Page|OrangeCommands.PageElementState;
+    getInfo(options?:Pages.PageStateOptions): PageClass|PageData;
     getElementCount(): number;
     verticalTrim();
     setExportFormat(options?: ExportPageFormat);
@@ -51,11 +61,12 @@ export default class PageClass implements PageStatic {
     renameSymbols(options?:Elements.SymbolDataOptions): string[];
     synchronizeSymbolNames(options?:Elements.SymbolDataOptions): string[];
     copySymbols(options?: InsertSymbolOptions);
+    copySymbolsReversed(options?: InsertSymbolOptions);
 }
 
 
 
-export default class PageState implements PageData {
+export class PageState implements PageData {
     originalName: string;
     name: string;
     index: number;
@@ -64,8 +75,8 @@ export default class PageState implements PageData {
     elementCount: number;
     elements: Fw.FwElement[];
     elementData: LayerElementData;
-    symbolInfo: OrangeCommands.Elements.SymbolInfo[];
-    symbols: OrangeCommands.Elements.Symbol[];
+    symbolInfo: Elements.SymbolInfo[];
+    symbols: Elements.Symbol[];
 
     constructor(options?:Pages.PageStateOptions);
 }

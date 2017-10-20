@@ -4,6 +4,14 @@ export default interface DocumentStatic extends OrangeCommands.OcElementData {
     OrangeCommandsModuleTest();
     ExportPagesFlags: ExportPagesFlags;
     ExportFormats: ExportFormats;
+
+    readonly bounds: PixelRectangle;
+    readonly size: Size;
+    readonly position: Position;
+
+    getBounds(container?: PixelRectangle): PixelRectangle;
+    getSize(container?: Size): Size;
+    getPosition(container?: Size): Position;
     importPages(path: string, options?: ImportPagesOptions);
     /**
      *

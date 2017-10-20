@@ -1,5 +1,5 @@
 declare namespace Fw {
-    export interface FwDocument {
+    export interface FwDocument extends Size, PixelRectangle {
         currentPageNum: number;
         docTitleWithoutExtension: string;
         guides: Guides;
@@ -25,6 +25,14 @@ declare namespace Fw {
         InsertPageForImport(fileURL:string, pageNumber?:number);
         insertSymbolAt(symbolName:string, locationPoint:Point);
         moveSelectionBy(delta:Point, bMakeCopy?:boolean, doSubSel?:boolean);
+        /**
+         *
+         * @param {Point} delta A point that specifies the x,y coordinate values by which the handle is moved
+         * @param {Fw.VectorFillHandle} whichHandle Specifies which handle to move and can be one of the following values: "start", "end1", "end2", "rotate1", or "rotate2". (Some fills ignore "end2".) Use "rotate1" or "rotate2" to rotate the end1 or end2 point around the start point.
+         * @param {boolean} [constrainMovement] If true, movement is constrained to 45º increments
+         * @param {boolean} [moveJustOneHandle] If true, only the specified handle moves. If false, other handles might move in sync when the specified handle is moved.
+         */
+        moveFillVectorHandleBy(delta:Point, whichHandle:VectorFillHandle, constrainMovement?:boolean, moveJustOneHandle?:boolean);
         removeAllGuides(guidekind?:GuideKind);
         setMasterPage(pageNumber: number);
         reorderPages(origPos: number, newPos: number);
@@ -59,6 +67,7 @@ declare namespace Fw {
         setTextLeading(leadingValue:number, leadingMode:TextLeadingMode);
         setTextRuns(text);
     }
+    type VectorFillHandle = 'start' | 'end1' | 'end2' | 'rotate1' | 'rotate2';
     type AlignmentMode = "left"| "right"| "top"| "bottom"| "center vertical"|"center horizontal";
     type SymbolType = 'graphic' | 'button' | 'animation';
     type ResolutionUnits = 'inch' | 'cm';
@@ -168,7 +177,8 @@ declare namespace Fw {
 }
 
 declare interface Object {
-    __defineGetter__(properyName: string, getter: Function);
+    __defineGetter__(propertyName: string, getter: Function);
+    __defineSetter__(propertyName: string, setter: Function);
 }
 
 declare interface Exception {
@@ -189,6 +199,7 @@ declare global {
         userJsCommandsDir: string;
         selection: Fw.FwSelection | Fw.FwSelection[];
         getDocumentDOM(): Fw.FwDocument;
+        createFireworksDocument(size:Point, resolution:Fw.Resolution, backgroundColor: Fw.FwColorString);
         browseForFolderURL(title?: string, startFolder?: string | null): string;
         browseForFileURL(browseType: Fw.FileBrowseType, title?, previewArea?);
         locateDocDialog(maxNumDocs: number, formatList:Fw.FileFormatName[]);
@@ -208,6 +219,11 @@ declare global {
         enumFiles(docOrDir: string): string[];
         exists(docOrDir: string): boolean;
         getDirectory(docname: string): string;
+        /**
+         * Returns extension with leading period, e.g. '.png'
+         * @param {string} docname
+         * @return {string}
+         */
         getExtension(docname: string): string;
         getFilename(docname: string): string;
         getLanguageDirectory(): string;
