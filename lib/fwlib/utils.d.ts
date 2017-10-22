@@ -117,6 +117,9 @@ declare module fwlib {
         noop(...args: any[]);
 
     }
+    export interface CommonPrefixOptions {
+        words?: boolean
+    }
     export interface utils {
         runCommand(extension: ExtensionInfo, cmdName?: string): boolean|string;
         // runCommand(cmdName: string, extensionInfo: ExtensionInfo): boolean|string;
@@ -124,7 +127,7 @@ declare module fwlib {
         copyObject<T>(inObject?: T): T;
         clone<T>(obj?: T): T;
         Logger: Logger,
-        log(...args: object[]): boolean;
+        log(...args: any[]): boolean;
         getLogger(section?: string|string[], verbosity?: number|boolean, defaultLogLevel?: number): Logger;
         noop(...args: object[]): boolean;
         stringify(obj): string;
@@ -133,7 +136,7 @@ declare module fwlib {
         capitalizeFirstLetter(subject: string): string;
         capitalize(subject: string): string;
         capitalizeWords(subject: string): string;
-        getCommonPrefix(strings: string[]): string;
+        getCommonPrefix(strings: string[], options?: CommonPrefixOptions): string;
         proxifyDom(dom?): string;
         proxify(obj?): object;
 

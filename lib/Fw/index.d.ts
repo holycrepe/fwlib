@@ -308,7 +308,7 @@ declare global {
     export function setInterval(handler: any, timeout?: any, ...args: any[]): number;
     export function setTimeout(handler: (...args: any[]) => void, timeout: number): number;
     export function setTimeout(handler: any, timeout?: any, ...args: any[]): number;
-
+    export function prompt(promptText?: string, defaultValue?: string|number): string | null;
 }
 declare interface FwArray<T> extends Array<T> {
 
