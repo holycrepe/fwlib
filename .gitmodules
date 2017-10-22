@@ -1,0 +1,3 @@
+[submodule "orangecommands"]
+	path = lib/orangecommands
+	url = ../orangecommands.git
